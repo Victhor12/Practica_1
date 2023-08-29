@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="estilo.css">
+<script src="jquery-3.1.1.min.js"></script>
+<html lang="en">
+    <head>
+        <H1>------Practica 1------</H1>
+        <meta charset="UTF-8">
+        <meta http.equiv="X-UA-Compatible" content="IR-edge">
+    </head>
+    <body>
+        <div class="cal_form" style="text-align:center; ">
+            <H1>Calculadora</H1>
+            <table align="center">
+                <tr>
+                    <div id="cant" style="text-align: center;"></div>
+                    <input id="calcu" autofocus type="text" name="btn" style="text-align:right;">
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><button id="ca" class="btn-4">CA</button></td>
+                    <td><button id="c" class="btn-4">C</button></td>
+                </tr>
+                <tr>
+                    <td><button id="n7" class="btn-4">7</button></td>
+                    <td><button id="n8" class="btn-4">8</button></td>
+                    <td><button id="n9" class="btn-4">9</button></td>
+                    <td><button id="divi" class="btn-4">/</button></td>
+                </tr>
+                <tr>
+                    <td><button id="n4" class="btn-4">4</button></td>
+                    <td><button id="n5" class="btn-4">5</button></td>
+                    <td><button id="n6" class="btn-4">6</button></td>
+                    <td><button id="multi" class="btn-4">x</button></td>
+                </tr>
+                <tr>
+                    <td><button id="n1" class="btn-4">1</button></td>
+                    <td><button id="n2" class="btn-4">2</button></td>
+                    <td><button id="n3" class="btn-4">3</button></td>
+                    <td><button id="bsuma" class="btn-4">+</button></td>
+                </tr>
+                <tr>
+                    <td><button id="n0" class="btn-4">0</button></td>
+                    <td><button id="punto" class="btn-4">.</button></td>
+                    <td><button id="btnigual" class="btn-4" onclick="operaracioncompleta()">=</button></td>
+                    <td><button id="resta" class="btn-4">-</button></td>
+                </tr>
+            </table>
+        </div>
+        
+    </body>
+
+</html>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#c').click(function(){
+            $('#calcu').val("");
+        });
+        $('#ca').click(function(){
+            $('#calcu').val("");
+            $('#cant').text("");
+        });
+
+        creavalor('n0',0);
+        creavalor('n1',1);
+        creavalor('n2',2);
+        creavalor('n3',3);
+        creavalor('n4',4);
+        creavalor('n5',5);
+        creavalor('n6',6);
+        creavalor('n7',7);
+        creavalor('n8',8);
+        creavalor('n9',9);
+
+        creaopera('bsuma','+');
+        creaopera('multi','*');
+        creaopera('divi','/');
+        creaopera('resta','-');
+    });
+    
+    function  creavalor(control, valor){
+        $('#' + control).click(function(){
+            var valActual=$('#calcu').val();
+            cadena=valActual + valor;
+            $('#calcu').val(cadena);
+            //alert(cadena)
+        });
+    }
+    function creaopera(control, operarecion){
+        $('#' + control).click(function(){
+            valoractual=$('#calcu').val();
+            $('#cant').text(valoractual+""+operarecion);
+            $('#calcu').val("");
+        }); 
+    }
+    function operaracioncompleta(){
+        valoractual=$('#calcu').val();
+        cantsave=$('#cant').text();
+        tipo=cantsave.split("");
+
+        switch(tipo[0]){
+            case "+":
+                resultado=parseInt(valoractual) + parseInt(tipo[1]);
+                $('#calcu').val(resultado);
+            break;
+
+            case "-":
+            resultado=parseInt(valoractual) - parseInt(tipo[1]);
+                $('#calcu').val(resultado);
+            break;
+
+            case "*":
+            resultado=parseInt(valoractual) * parseInt(tipo[1]);
+                $('#calcu').val(resultado);
+            break;
+
+            case "/":
+            resultado=parseInt(valoractual) / parseInt(tipo[1]);
+                $('#calcu').val(resultado);
+            break;
+        }
+    }
+    </script>
